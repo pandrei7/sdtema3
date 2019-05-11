@@ -271,8 +271,30 @@ std::vector<std::vector<int>> AEGraph::possible_double_cuts() const {
 }
 
 AEGraph AEGraph::double_cut(std::vector<int> where) const {
-    // 10p
-    return AEGraph("()");
+    auto pos_remove = where[0];
+    AEGraph copied(repr());
+
+    // replace the indicated subgraph with its new form.
+    if (where.size() > 1) {
+        // the node needed to be removed is further down.
+        std::vector<int> new_where(where.begin() + 1, where.end());
+        auto new_subgraph = copied.subgraphs[pos_remove].double_cut(new_where);
+        copied.subgraphs[pos_remove] = new_subgraph;
+    } else {
+        // delete the subgraph.
+        auto node = subgraphs[pos_remove].subgraphs[0];
+        copied.subgraphs.erase(copied.subgraphs.begin() + pos_remove);
+
+        // copy the atoms and subgraphs from the deleted node.
+        for (const auto& sub : node.subgraphs) {
+            copied.subgraphs.push_back(sub);
+        }
+        for (const auto& atom : node.atoms) {
+            copied.atoms.push_back(atom);
+        }
+    }
+
+    return copied;
 }
 
 
