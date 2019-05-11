@@ -299,7 +299,7 @@ AEGraph AEGraph::double_cut(std::vector<int> where) const {
 
 
 std::vector<std::vector<int>> AEGraph::possible_erasures(int level) const {
-	std::vector<std::vector<int>> paths;
+    std::vector<std::vector<int>> paths;
     int len_subgraphs = num_subgraphs();
     int len = size();
 
@@ -330,8 +330,25 @@ std::vector<std::vector<int>> AEGraph::possible_erasures(int level) const {
 
 
 AEGraph AEGraph::erase(std::vector<int> where) const {
-    // 10p
-    return AEGraph("()");
+    AEGraph tmp(repr());
+
+    // Remove operation
+	if (where.size() == 1) {
+		// Delete atom
+		if (where[0] >= num_subgraphs()){
+			tmp.atoms.erase(tmp.atoms.begin() + where[0] - num_subgraphs());
+		} else {
+			// Delete subgraph
+			tmp.subgraphs.erase(tmp.subgraphs.begin() + where[0]);
+		}
+	} else {
+		// Continue search until the end of sequence
+		std::vector<int> nextWhere(where.begin() + 1, where.end());
+		auto newSubgraph = tmp.subgraphs[where[0]].erase(nextWhere);
+		tmp.subgraphs[where[0]] = newSubgraph;
+	}
+
+    return tmp;
 }
 
 
