@@ -299,8 +299,33 @@ AEGraph AEGraph::double_cut(std::vector<int> where) const {
 
 
 std::vector<std::vector<int>> AEGraph::possible_erasures(int level) const {
-    // 10p
-    return {};
+	std::vector<std::vector<int>> paths;
+    int len_subgraphs = num_subgraphs();
+    int len = size();
+
+    //  Check if we can erase subgraphs
+    for (int i = 0; i < len_subgraphs; ++i) {
+        if (level % 2) {
+	    	paths.push_back({i});
+	    }
+        
+        auto r = subgraphs[i].possible_erasures(level + 1);
+    	for (auto& v : r) {
+            v.insert(v.begin(), i);
+            if (subgraphs[i].size() > 1 || level == -1) {
+        		paths.push_back(v);
+            }
+        }
+    }
+    
+    // Check if we can erase atoms
+    for (int i = len_subgraphs; i < len; ++i) {
+    	if (level % 2) {
+	    	paths.push_back({i});
+	    }
+    }
+
+    return paths;
 }
 
 
