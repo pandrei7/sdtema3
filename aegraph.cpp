@@ -353,8 +353,27 @@ AEGraph AEGraph::erase(std::vector<int> where) const {
 
 
 std::vector<std::vector<int>> AEGraph::possible_deiterations() const {
-    // 20p
-    return {};
+    std::vector<std::vector<int>> paths;
+    int len_subgraphs = num_subgraphs();
+    int sons = size();
+
+    for (int i = 0; i < sons; i++) {
+        // get all the paths to a subgraph similar to the current son.
+        std::vector<std::vector<int>> r;
+        if (i < len_subgraphs) {
+            r = get_paths_to(subgraphs[i]);
+        } else {
+            r = get_paths_to(atoms[i - len_subgraphs]);
+        }
+
+        // remove the direct path to the son.
+        r.erase(remove(r.begin(), r.end(), std::vector<int>{i}), r.end());
+
+        // add the new deiteration positions.
+        paths.insert(paths.end(), r.begin(), r.end());
+    }
+
+    return paths;
 }
 
 AEGraph AEGraph::deiterate(std::vector<int> where) const {
