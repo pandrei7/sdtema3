@@ -254,13 +254,13 @@ std::vector<std::vector<int>> AEGraph::possible_double_cuts() const {
     int len_subgraphs = num_subgraphs();
 
     for (int i = 0; i < len_subgraphs; i++) {
-        // add the current edge to existing paths.
+        // Add the current edge to existing paths
         auto r = subgraphs[i].possible_double_cuts();
         for (auto& v : r) {
             v.insert(v.begin(), i);
         }
 
-        // check if we can "double cut" at the current son.
+        // Check if we can "double cut" at the current son
         if (subgraphs[i].size() == 1 && subgraphs[i].num_atoms() == 0) {
             r.push_back({i});
         }
@@ -274,18 +274,18 @@ AEGraph AEGraph::double_cut(std::vector<int> where) const {
     auto pos_remove = where[0];
     AEGraph copied(repr());
 
-    // replace the indicated subgraph with its new form.
+    // Replace the indicated subgraph with its new form
     if (where.size() > 1) {
-        // the node needed to be removed is further down.
+        // The node needed to be removed is further down
         std::vector<int> new_where(where.begin() + 1, where.end());
         auto new_subgraph = copied.subgraphs[pos_remove].double_cut(new_where);
         copied.subgraphs[pos_remove] = new_subgraph;
     } else {
-        // delete the subgraph.
+        // Delete the subgraph
         auto node = subgraphs[pos_remove].subgraphs[0];
         copied.subgraphs.erase(copied.subgraphs.begin() + pos_remove);
 
-        // copy the atoms and subgraphs from the deleted node.
+        // Copy the atoms and subgraphs from the deleted node
         for (const auto& sub : node.subgraphs) {
             copied.subgraphs.push_back(sub);
         }
@@ -358,7 +358,7 @@ std::vector<std::vector<int>> AEGraph::possible_deiterations() const {
     int sons = size();
 
     for (int i = 0; i < sons; i++) {
-        // get all the paths to a subgraph similar to the current son.
+        // Get all the paths to a subgraph similar to the current son
         std::vector<std::vector<int>> r;
         if (i < len_subgraphs) {
             r = get_paths_to(subgraphs[i]);
@@ -366,10 +366,10 @@ std::vector<std::vector<int>> AEGraph::possible_deiterations() const {
             r = get_paths_to(atoms[i - len_subgraphs]);
         }
 
-        // remove the direct path to the son.
+        // Remove the direct path to the son
         r.erase(remove(r.begin(), r.end(), std::vector<int>{i}), r.end());
 
-        // add the new deiteration positions.
+        // Add the new deiteration positions
         paths.insert(paths.end(), r.begin(), r.end());
     }
 
