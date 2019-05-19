@@ -1,39 +1,40 @@
-	Readme Tema3 Structuri de date 2019
+    Readme Tema3 Structuri de date 2019
 
-	Neatu Remus - 311CA
-	Preda Andrei - 311CA
-	Link github: https://github.com/pandrei7/sdtema3
+    Neațu Remus - 311CA
+    Preda Andrei - 311CA
+    Link github: https://github.com/pandrei7/sdtema3
 
-	Contributie Neatu Remus:
-	- functia possible_erasures();
-	- functia erase();
-	- functia deiterate();
+    Contribuție Neațu Remus:
+    - funcția possible_erasures();
+    - funcția erase();
+    - funcția deiterate();
 
-	Contributie Preda Andrei: 
-	- functia possible_double_cuts();
-	- functia double_cut();
-	- functia possible_deiterrations();
+    Contribuție Preda Andrei:
+    - funcția possible_double_cuts();
+    - funcția double_cut();
+    - funcția possible_deiterations();
 
-	possible_double_cuts:
-		Am implementat functia recursiv, construind solutia de jos in sus, verificand la
-	inceput	conditiile necesare pentru a efectua double_cut.
+    possible_double_cuts:
+        Am implementat funcția recursiv, construind soluția de jos în sus
+    (de la frunze către rădăcină), verificând la început condițiile necesare
+    pentru a efectua double_cut.
 
-	double_cut:
-		Am implementat functia recursiv, de fiecare data parametrul fiind sirul obtinut de
-	pe pozitiile 1 -> where.size() - 1, eliminand muchiile in plus, iar la fiecare pas am 
-	copiat subgraful nou obtinut.
+    double_cut:
+        Am implementat funcția recursiv, de fiecare dată parametrul fiind
+    șirul obținut de pe pozițiile 1 -> where.size() - 1, eliminând muchiile
+    în plus, iar la fiecare pas am copiat subgraful nou obținut.
 
-	possible_erasures:
-		Am implementat functia recursiv, construind solutia de jos in sus, verificand la fiecare
-	pas daca nivelul este par si daca se pot elimina subgrafurile si atomii.	
+    possible_erasures:
+        Am implementat funcția recursiv, construind soluția de jos în sus,
+    verificând la fiecare pas dacă nivelul este par și dacă se pot elimina
+    subgrafurile și atomii.
 
-	erase && deiterate:
-		Am implementat functia recursiv, de fiecare data parametrul fiind sirul obtinut de
-	pe pozitiile 1 -> where.size() - 1, eliminand subgrafurile si atomii, iar la fiecare pas am
-	copiat subgraful nou obtinut.
+    erase && deiterate:
+        Am implementat funcția recursiv, de fiecare dată parametrul fiind
+    șirul obținut de pe pozițiile 1 -> where.size() - 1, eliminând subgrafurile
+    și atomii, iar la fiecare pas am copiat subgraful nou obținut.
 
-	possible_deiterations:
-		Am folosit functia (deja implementata) get_paths_to pentru a obtine toate caile catre 
-	subgrafuri similare cu fiul curent, iar apoi am adaugat noile pozitii pentru deiterare.
-
-  
+    possible_deiterations:
+        Am folosit funcția (deja implementată) get_paths_to pentru a obține
+    toate căile către subgrafuri similare cu fiul curent, iar apoi am adăugat
+    noile poziții pentru deiterate.
