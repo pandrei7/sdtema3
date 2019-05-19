@@ -308,7 +308,7 @@ std::vector<std::vector<int>> AEGraph::possible_erasures(int level) const {
         if (level % 2) {
 	    	paths.push_back({i});
 	    }
-	
+
 	// Build the paths
         auto r = subgraphs[i].possible_erasures(level + 1);
     	for (auto& v : r) {
