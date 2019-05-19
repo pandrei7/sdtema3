@@ -1,17 +1,39 @@
-To run the checker, all you have to do is execute the "./run_all.sh" command.
-This command compiles your source files, then compiles the test source files
-(present in the _test folder) and runs all the test executables newly created.
-Then the checker collects all the test scores and adds them up.
+	Readme Tema3 Structuri de date 2019
 
-If you want to run the checker after changing your implementation files, all
-you have to do is run the same command again. The checker will run the Makefile
-so you won't have to do so manually.
+	Neatu Remus - 311CA
+	Preda Andrei - 311CA
+	Link github: https://github.com/pandrei7/sdtema3
 
-To run the coding style checker, you can run the
-"./cpplint.py *.cpp *.h" command. The run_all.sh script also checks
-your coding style and scales your score accordingly.
+	Contributie Neatu Remus:
+	- functia possible_erasures();
+	- functia erase();
+	- functia deiterate();
 
-The archive you have to upload to vmchecker should contain:
-- README, describing the implementation and personal contributions of team
-members
-- aegraph.cpp
+	Contributie Preda Andrei: 
+	- functia possible_double_cuts();
+	- functia double_cut();
+	- functia possible_deiterrations();
+
+	possible_double_cuts:
+		Am implementat functia recursiv, construind solutia de jos in sus, verificand la
+	inceput	conditiile necesare pentru a efectua double_cut.
+
+	double_cut:
+		Am implementat functia recursiv, de fiecare data parametrul fiind sirul obtinut de
+	pe pozitiile 1 -> where.size() - 1, eliminand muchiile in plus, iar la fiecare pas am 
+	copiat subgraful nou obtinut.
+
+	possible_erasures:
+		Am implementat functia recursiv, construind solutia de jos in sus, verificand la fiecare
+	pas daca nivelul este par si daca se pot elimina subgrafurile si atomii.	
+
+	erase && deiterate:
+		Am implementat functia recursiv, de fiecare data parametrul fiind sirul obtinut de
+	pe pozitiile 1 -> where.size() - 1, eliminand subgrafurile si atomii, iar la fiecare pas am
+	copiat subgraful nou obtinut.
+
+	possible_deiterations:
+		Am folosit functia (deja implementata) get_paths_to pentru a obtine toate caile catre 
+	subgrafuri similare cu fiul curent, iar apoi am adaugat noile pozitii pentru deiterare.
+
+  
